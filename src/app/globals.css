@@ -1,26 +1,101 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand-green: #00FFCC;
+  /* 科技感青藍色 */
+  --color-brand-blue: #0088FF;
+  /* 科技感深藍色 */
+  --color-brand-dark: #0A0A0A;
+  /* 極黑背景 */
+  --color-brand-gray: #1A1A1A;
+  /* 深灰卡片背景 */
+  --color-brand-text: #E0E0E0;
+  /* 預設文字顏色 */
+  --color-brand-text-muted: #888888;
+  /* 次要文字顏色 */
+  --font-sans: var(--font-inter);
+  /* 使用 Inter 字體 */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* 全局重置 */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-brand-dark);
+    color: var(--color-brand-text);
+    font-family: var(--font-sans), sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 客製化捲軸 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-brand-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-blue);
+}
+
+/* 霓虹光暈效果 */
+.glow-effect {
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+}
+
+/* Logo 專屬呼吸狀態切換動畫 (模擬 Hover) */
+@keyframes logo-glow {
+
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes logo-color {
+
+  0%,
+  100% {
+    color: #ffffff;
+    /* text-white */
+    stroke: rgba(224, 224, 224, 0.7);
+    /* stroke-[#E0E0E0] opacity-70 */
+    filter: drop-shadow(0 0 8px rgba(247, 147, 26, 0));
+  }
+
+  50% {
+    color: #F7931A;
+    /* text-[#F7931A] */
+    stroke: #F7931A;
+    /* stroke-[#F7931A] */
+    filter: drop-shadow(0 0 8px rgba(247, 147, 26, 0.8));
+  }
+}
+
+.animate-logo-glow {
+  animation: logo-glow 4s ease-in-out infinite;
+}
+
+.animate-logo-color {
+  animation: logo-color 4s ease-in-out infinite;
 }
